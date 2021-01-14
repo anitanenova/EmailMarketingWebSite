@@ -1,0 +1,174 @@
+﻿@using BusinessManagement.Resources.LanguageResources
+@using BusinessManagement.WebSite.Models.Home
+
+@{
+    ViewData["Title"] = "Home";
+}
+<style>
+    .logo {
+        display: none;
+    }
+</style>
+
+<script src="~/js/Home/Home.js"></script>
+
+<div class="full-screen-div part-one-logo">
+</div>
+
+<div id="home-part-two" class="full-screen-div part-two">
+
+    <div id="fullwidth-block-5bffcb9f0a422" class="fullwidth-block fullwidth-block-parallax-vertical clearfix" data-mobile-parallax-enable="0" style="padding-top: 100px;padding-bottom: 500px;">
+        <script type="text/javascript">if (typeof (gem_fix_fullwidth_position) == "function") { gem_fix_fullwidth_position(document.getElementById("fullwidth-block-5bffcb9f0a422")); }</script><div class="fullwidth-block-inner">
+            <div class="container">
+                <div class="wpb_single_image wpb_content_element vc_align_left  images-of-part-two gear-1">
+                    <figure class="wpb_wrapper vc_figure">
+                        <div class="vc_single_image-wrapper   vc_box_border_grey">
+                            <img class="vc_single_image-img" src="~/images/HomeSmallImagesRotate/small-image-1-rotate.png" />
+                        </div>
+                    </figure>
+                </div>
+
+                <div class="wpb_single_image wpb_content_element vc_align_left images-of-part-two  gear-2">
+                    <figure class="wpb_wrapper vc_figure">
+                        <div class="vc_single_image-wrapper   vc_box_border_grey">
+                            <img src="~/images/HomeSmallImagesRotate/small-image-2-rotate.png" />
+                        </div>
+                    </figure>
+                </div>
+
+                <div class="wpb_single_image wpb_content_element vc_align_left images-of-part-two  gear-3">
+                    <figure class="wpb_wrapper vc_figure">
+                        <div class="vc_single_image-wrapper   vc_box_border_grey">
+                            <img src="~/images/HomeSmallImagesRotate/small-image-3-rotate.png" />
+                        </div>
+                    </figure>
+                </div>
+
+                <div class="wpb_single_image wpb_content_element vc_align_left images-of-part-two  gear-4">
+                    <figure class="wpb_wrapper vc_figure">
+                        <div class="vc_single_image-wrapper   vc_box_border_grey">
+                            <img src="~/images/HomeSmallImagesRotate/small-image-4-rotate.png" />
+                        </div>
+                    </figure>
+                </div>
+
+                <div class="wpb_single_image wpb_content_element vc_align_left images-of-part-two  gear-5">
+                    <figure class="wpb_wrapper vc_figure">
+                        <div class="vc_single_image-wrapper   vc_box_border_grey">
+                            <img src="~/images/HomeSmallImagesRotate/small-image-5-rotate.png" />
+                        </div>
+                    </figure>
+                </div>
+
+                <div class="wpb_single_image wpb_content_element vc_align_left images-of-part-two  gear-6">
+                    <figure class="wpb_wrapper vc_figure">
+                        <div class="vc_single_image-wrapper   vc_box_border_grey">
+                            <img src="~/images/HomeSmallImagesRotate/small-image-6-rotate.png" />
+                        </div>
+                    </figure>
+                </div>
+
+                <div class="wpb_single_image wpb_content_element vc_align_left images-of-part-two gear-7">
+                    <figure class="wpb_wrapper vc_figure">
+                        <div class="vc_single_image-wrapper   vc_box_border_grey">
+                            <img src="~/images/HomeSmallImagesRotate/small-image-7-rotate.png" />
+                        </div>
+                    </figure>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="background-part-third">
+    <div id="third-part" class="container">
+        <div class="row container-text third-part-container-part-one">
+            <div class="col-md-6 col-sm-12 col-xs-12 content">
+                <img class="center-image small-mobile-center-image" src="~/images/Home/image1.png" />
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 content">
+                <h1>@HomeIndexResource.BetterEmail</h1>
+                <p>@HomeIndexResource.TextBetterEmail</p>
+            </div>
+        </div>
+
+        <div class="row container-text third-part-container-part-two">
+            <div class="col-md-6 col-sm-12 col-xs-12 content image-small">
+                <img class="center-image small-mobile-center-image" src="~/images/Home/images2.png" />
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 content">
+                <h1>@HomeIndexResource.AutoMarketing</h1>
+                <p>@HomeIndexResource.TextAutoMarketing</p>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 content image-big">
+                <img class="center-image small-mobile-center-image" src="~/images/Home/images2.png" />
+            </div>
+        </div>
+
+        <div class="row container-text third-part-container-part-three">
+            <div class="col-md-6 col-sm-12 col-xs-12 content">
+                <img class="center-image small-mobile-center-image" src="~/images/Home/images3.png" />
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 content ">
+                <h1>@HomeIndexResource.CreateProLetters</h1>
+                <p>@HomeIndexResource.TextCreateProLetters</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @{
+        var model = new SubscribeViewModel
+        {
+            SubTitle = @HomeIndexResource.InformedProgress,
+            Title = @HomeIndexResource.SubscribeNewsletter
+        };
+
+        await Html.RenderPartialAsync("_Subscribe", model);
+    }
+</div>
+
+<div id="hydra-video-modal-container"></div>
+
+<div class="container part-five">
+    <div class="col-md-4">
+        <div>
+            <h1>@HomeIndexResource.Analysis</h1>
+            <p>@HomeIndexResource.TextAnalysis</p>
+        </div>
+        <div>
+            <h1>@HomeIndexResource.ComingFeature</h1>
+            <p>@HomeIndexResource.TextComingFeature</p>
+        </div>
+    </div>
+
+    <div id="hydra-image" class="col-md-4 mouse-pointer">
+        <img class="center-image small-mobile-center-image" src="~/images/Home/hydra.png" />
+    </div>
+
+    <div class="col-md-4">
+        <div>
+            <h1>@HomeIndexResource.UserFriendlyAccessible</h1>
+            <p>@HomeIndexResource.TextUserFriendlyAccessible</p>
+        </div>
+        <div>
+            <h1>@HomeIndexResource.MoreFromHydra</h1>
+            <p>@HomeIndexResource.TextMoreFromHydra</p>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+
+<script>
+    var menu = new NavMenu(true, $(this));
+    menu.init();
+
+    $('#hydra-image').on('click', function () {
+        ShowVideoHydra("hydra-video-modal-container");
+    });
+</script>

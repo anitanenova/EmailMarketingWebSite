@@ -1,0 +1,16 @@
+﻿@model List<BusinessManagement.Services.Model.DTO.BlogTagDto> 
+
+    @{
+        foreach (var tag in Model)
+        {
+            <li>
+                <span>
+                    <label class="switch">
+                        <input class="tag-checkbox" data-tag-id="@tag.Id" id="tag-@tag.Id" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </span>
+                <label for="tag-@tag.Id">@tag.Name</label>
+            </li>
+        }
+    }

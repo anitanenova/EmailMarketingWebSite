@@ -1,0 +1,11 @@
+﻿.blog-post-tags-container {
+    border: 1px solid grey;
+}
+
+.blog-post-tags-container > div {
+    display: inline-block;
+    margin: 7px 9px;
+}
+.note-toolbar panel-heading {
+    z-index: 1;
+}

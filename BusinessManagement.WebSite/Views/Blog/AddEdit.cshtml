@@ -1,0 +1,523 @@
+﻿@using BusinessManagement.Resources.LanguageResources
+@using BusinessManagement.WebSite.Helpers
+@model BusinessManagement.WebSite.Models.Blog.AddEditBlogPostViewModel
+
+<div class="container">
+
+    @{
+        if (Model.Id == Guid.Empty)
+        {
+            <h1 class="text-center">@BlogResource.NewPost</h1>
+        }
+        else
+        {
+            <h1 class="text-center">@BlogResource.EditPost "@Model.Title"</h1>
+        }
+    }
+
+    <div class="ligne-grey"></div>
+
+    <form id="create-blog-post-form" asp-controller="Blog" asp-action="BlogPostAddEdit" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-swich-container form-control-height col-md-1 blog-post-switchs">
+                    <label class="switch">
+                        <input asp-for="IsCoverImageChoised" id="cover-photo-on-off" type="checkbox" checked="checked">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="col-md-11">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label asp-for="CoverImage"></label>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="file-upload txt col-md-12 cover-image-upload-container">
+                                <div id="image-select-container" class="file-select">
+                                    <div class="file-select-button" id="image-select-button">@BlogResource.File</div>
+                                    <div id="no-image-file-selected" class="file-select-name">@BlogResource.NotSelect</div>
+                                    <input id="image-value" type="file" class="image" asp-for="CoverImage" onchange="readURL(this);">
+                                </div>
+                                <div id="remove-image-container"></div>
+                            </div>
+                            <span> @BlogResource.FileType</span>
+                            <span asp-validation-for="CoverImage" id="image-err-container" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="change-cover-image-container">
+
+                    <img id="preview-cover-image" class="blog-post-image redaction-post-image" alt="240_F_134329046_2OSJoExFAJpG6gC3lXTlWOv3EQ4diq7a.jpg"
+                         src="#" />
+
+
+                    @{
+                        if (Model.Id != Guid.Empty && Model.IsCoverImageChoised)
+                        {
+
+
+
+                            <img id="old-cover-image" class="blog-post-image redaction-post-image" alt="240_F_134329046_2OSJoExFAJpG6gC3lXTlWOv3EQ4diq7a.jpg"
+                                 src="data:image/jpeg;base64,@Model.ImageStr" />
+
+                            <input type="hidden" asp-for="ImageStr" />
+                        }
+                    }
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-swich-container form-control-height col-md-1 blog-post-switchs">
+                    <label class="switch">
+                        <input asp-for="IsVideoUrlChoised" id="video-on-off" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class=" col-md-11">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label asp-for="VideoUrl"></label>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="text" asp-for="VideoUrl">
+                            <span asp-validation-for="VideoUrl" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <label asp-for="Title"></label>
+                </div>
+                <div class="col-md-12">
+                    <input type="text" asp-for="Title">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <label asp-for="ShortText"></label>
+                </div>
+                <div class="col-md-12">
+                    <span> @BlogResource.TxtListPost </span>
+                    <textarea asp-for="ShortText"></textarea>
+                    @*<input id="text-value" type="text" asp-for="Text" />*@
+                    <span asp-validation-for="ShortText" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <label asp-for="FullText"></label>
+                </div>
+                <div class="col-md-12">
+                    <span> @BlogResource.TxtPostOpen </span>
+                    <textarea asp-for="FullText"></textarea>
+                    @*<input id="text-value" type="text" asp-for="Text" />*@
+                    <span asp-validation-for="FullText" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label asp-for="Tags"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span id="add-new-tag-btn" class="btn btn-primary">+</span>
+                            </span>
+                            <input type="text" id="search-tag" placeholder="@BlogResource.TagSearch">
+                        </div>
+                        <div id="add-new-tag-modal-container"></div>
+                        <div class="blog-post-tags-container">
+                            <ul id="search-tag-ul">
+
+                                @{
+                                    await Html.RenderPartialAsync("_Tags", Model.Tags);
+                                }
+                            </ul>
+
+                        </div>
+                        <input type="hidden" asp-for="TagsIds">
+                        <span asp-validation-for="TagsIds" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label asp-for="Product"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <select asp-for="Product" asp-items="Model.Products"></select>
+                        <span asp-validation-for="Product" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label asp-for="Date"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <div class='input-group date blog-post-date-container'>
+                            <input type='text' asp-for="Date" id="blog-post-date" class="form-control" />
+                            <span class="input-group-addon" id="blog-post-date-icon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label asp-for="Status"></label>
+                    </div>
+                    <div class="col-md-12">
+                        <select asp-for="Status" asp-items="Model.Statuses"></select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ligne-grey"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <input class="btn btn-primary btn-blog-post-save-preview pull-right" type="submit" value="@BlogResource.Save" />
+                <a class="btn btn-primary btn-blog-post-save-preview pull-right" asp-controller="Blog" asp-action="DuplicatePost" asp-route-postId="@Model.Id">@BlogResource.Duplicate</a>
+                <a class="btn btn-primary btn-blog-post-save-preview pull-left" asp-controller="Blog" asp-action="Index">@BlogResource.Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    var menu = new NavMenu(false, $(this));
+    menu.init();
+
+    //text editors
+    $(document).ready(function () {
+        $('#ShortText').summernote({
+            height: 100,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true,                  // set focus to editable area after initializing summernote
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+
+
+        $('#FullText').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true                 // set focus to editable area after initializing summernote
+
+        });
+    });
+
+    /////////////////////TAGS
+
+    ///TODO да се направи за запазва в едно скрито поле идтата на таговето който за избрани за тага
+
+    $(document).ready(function () {
+        onTagLoaded();
+    });
+
+
+    function checkTagsFromField() {
+
+        var allCheckedTagsIds = $("#TagsIds").val().split(", ");
+        for (var i = 0; i < allCheckedTagsIds.length; i++) {
+            $("#tag-" + allCheckedTagsIds[i]).prop('checked', true);
+        }
+    }
+
+    function tagCheckboxChangeEventLisener() {
+
+        $(".tag-checkbox").on('change', function () {
+            var allCheckedTagsIds = [];
+
+            if ($("#TagsIds").val() != "") {
+                allCheckedTagsIds = $("#TagsIds").val().split(", ");
+            }
+
+            if ($(this).is(':checked')) {
+
+                allCheckedTagsIds.push($(this).attr("data-tag-id"));
+            } else {
+                var index = allCheckedTagsIds.indexOf($(this).attr("data-tag-id"));
+                if (index > -1) {
+                    allCheckedTagsIds.splice(index, 1);
+                }
+            }
+
+            $("#TagsIds").val(allCheckedTagsIds.join(", "));
+        });
+    }
+
+
+    function onTagLoaded() {
+        checkTagsFromField();
+        tagCheckboxChangeEventLisener();
+    }
+
+
+    var addNewTagBtnEl = $("#add-new-tag-btn");
+    var addNewTagGetUrl = "/blog/AddNewTag";
+    var modalContainerEl = $("#add-new-tag-modal-container");
+
+
+    window.setSearch({
+        searchEl: $("#search-tag"),
+        ulEl: $("#search-tag-ul"),
+        actionUrl: "/Blog/Tags",
+        take: Number.MAX_SAFE_INTEGER,
+        noDataNsg: "Няма резултати!",
+        searchFinished: onTagLoaded
+    });
+
+    addNewTagBtnEl.on('click', function () {
+        window.showLoading();
+        $.get(addNewTagGetUrl, function (data) {
+            modalContainerEl.html(data);
+            var modalAddNewTagEl = $("#add-new-tag-modal");
+            modalAddNewTagEl.appendTo("body").modal('show');
+            window.hideLoading();
+        });
+    });
+
+
+
+    //cover image and video state
+
+
+    var image = "@Model.ImageStr";
+    var videolink = "@Model.VideoUrl";
+
+    $(document).ready(function() {
+
+        if (videolink == "") {
+            disabledVideo();
+            enabledCoverImage();
+            $("#cover-photo-on-off").prop('checked', true);
+        } else {
+            enabledVideo();
+            disabledCoverImage();
+            $("#cover-photo-on-off").prop('checked', false);
+            $('#video-on-off').prop('checked', true);
+        }
+
+    });
+
+    $("#cover-photo-on-off").on('change', function () {
+
+        if ($("#cover-photo-on-off").is(':checked')) {
+
+            $('#video-on-off').prop('checked', false);
+            disabledVideo();
+            enabledCoverImage();
+
+        } else {
+            $('#video-on-off').prop('checked', true);
+            enabledVideo();
+            disabledCoverImage();
+        }
+    });
+
+    $("#video-on-off").on('change', function () {
+
+        if ($("#video-on-off").is(':checked')) {
+
+            $('#cover-photo-on-off').prop('checked', false);
+            enabledVideo();
+            disabledCoverImage();
+
+        } else {
+            $('#cover-photo-on-off').prop('checked', true);
+            disabledVideo();
+            enabledCoverImage();
+        }
+    });
+
+    function disabledCoverImage() {
+        $("#image-select-button").attr('disabled', 'disabled');
+        $("#image-select-container").attr('disabled', 'disabled');
+        $("#image-select-button").addClass("disabled-cover-image-blog-post");
+        $("#image-select-container").addClass("disabled-cover-image-blog-post");
+        $(".file-upload, .file-select:hover, .file-select-button").css('color', '#09475c');
+        $("#image-value").addClass("disabled-cover-image-blog-post");
+        $(".cover-image-upload-container").addClass("disabled-cover-image-blog-post");
+        $(".change-cover-image-container").hide();
+    };
+
+
+    function enabledCoverImage() {
+        $("#image-select-button").removeAttr('disabled', 'disabled');
+        $("#image-select-container").removeAttr('disabled', 'disabled');
+        $("#image-select-button").removeClass("disabled-cover-image-blog-post");
+        $("#image-select-container").removeClass("disabled-cover-image-blog-post");
+        $(".file-upload, .file-select:hover, .file-select-button").css('color', '');
+        $("#image-value").removeClass("disabled-cover-image-blog-post");
+        $(".cover-image-upload-container").removeClass("disabled-cover-image-blog-post");
+        $(".change-cover-image-container").show();
+    };
+
+    $("#image-value").on('click', function (e) {
+        if ($("#image-value").hasClass("disabled-cover-image-blog-post")) {
+            e.preventDefault();
+        }
+    });
+
+    function disabledVideo() {
+        $('#VideoUrl').addClass('disabled-cover-video-blog-post');
+        $('#VideoUrl').attr('disabled', 'disabled');
+
+    };
+
+    function enabledVideo() {
+        $('#VideoUrl').removeClass('disabled-cover-video-blog-post');
+        $('#VideoUrl').removeAttr('disabled');
+
+    };
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview-cover-image')
+                    .attr('src', e.target.result);
+
+
+               $("#preview-cover-image").show();
+               $("#old-cover-image").hide();
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+
+        }
+
+    }
+
+    //datetime piccer
+    $(function () {
+        $("#blog-post-date").datetimepicker({
+            format: 'L',
+            locale: '@DateHelper.GetCurrentCultureName()',
+
+        });
+    });
+
+    $("#blog-post-date-icon").on('click', function() {
+        $("#blog-post-date").focus();
+    });
+
+    $(function () {
+        $('#blog-post-date').datetimepicker({ pickTime: false });
+    });
+
+    //cover image
+    var invalidImageType = '@BlogResource.PicTypeSel';
+    var noChosseMsg = "@BlogResource.NotSelect";
+    var removeChoiceForImageTitle = "@BlogResource.RemovePic";
+
+
+    var noFileEl = $("#no-image-file-selected");
+    var errContainerEl = $('#image-err-container');
+    var removeContainerEl = $('#remove-image-container');
+    var fileSelectEl = $('#image-select-container');
+
+    function removeSelectedImage(id) {
+        var fuData = document.getElementById(id);
+
+        errContainerEl.html("");
+        errContainerEl.hide();
+        noFileEl.html(noChosseMsg);
+        fuData.value = fuData.defaultValue;
+        removeContainerEl.html("");
+        removeContainerEl.removeClass("col-md-1");
+        fileSelectEl.removeClass("col-md-11");
+
+        $("#preview-cover-image").hide();
+        $("#old-cover-image").show();
+
+
+    }
+
+
+    $("#image-value").change(function () {
+        debugger;
+        var id = $(this).attr('id');
+        var validTypes = "gif, png, bmp, jpeg, jpg";
+
+        var fuData = document.getElementById(id);
+
+
+        var removeImageHtml = "<i title=\"" + removeChoiceForImageTitle + "\" onclick='removeSelectedImage(\"" + id +"\")' class='remove-choice-for-image-title fas fa-times icon-on-bright-background tooltip-normal'></i>";
+
+
+
+        if (!window.isValidFile(id, validTypes)) {
+            errContainerEl.html(invalidImageType);
+            errContainerEl.show();
+            noFileEl.html(noChosseMsg);
+            fuData.value = fuData.defaultValue;
+            removeContainerEl.html("");
+            removeContainerEl.removeClass("col-md-1");
+            fileSelectEl.removeClass("col-md-11");
+            return;
+        } else {
+            errContainerEl.html("");
+            errContainerEl.hide();
+        }
+
+        var fileUploadPath = fuData.value;
+        var startIndex = (fileUploadPath.indexOf('\\') >= 0 ? fileUploadPath.lastIndexOf('\\') : fileUploadPath.lastIndexOf('/'));
+        var filename = fileUploadPath.substring(startIndex + 1);
+
+        noFileEl.html(filename);
+        removeContainerEl.html(removeImageHtml);
+        removeContainerEl.addClass("col-md-1");
+        fileSelectEl.addClass("col-md-11");
+    });
+
+
+</script>

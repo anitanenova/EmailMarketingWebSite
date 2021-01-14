@@ -1,0 +1,122 @@
+﻿@using BusinessManagement.Resources.LanguageResources
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+
+    @Html.Partial("_Scripts")
+
+
+</head>
+<body>
+    @inject IOptions<RequestLocalizationOptions> LocOptions
+
+    @{
+        var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+        var cultureItems = LocOptions.Value.SupportedUICultures
+            .Select(c => new SelectListItem { Value = c.Name, Text = c.TwoLetterISOLanguageName.ToUpper() })
+            .ToList();
+    }
+
+    <partial name="_CookieConsentPartial" />
+    @Html.Partial("_Loading")
+    <div id="perspective" class="perspective effect-rotateleft">
+        <div class="containerPerspective">
+            <div class="wrapper">
+                <div class="nav-menu">
+                    <div class="nav-menu-left-container">
+                        <div class="logo">
+                            <a asp-controller="Home" asp-action="Index"><img src="~/images/Home/logo-navbar.png" /></a>
+                        </div>
+                    </div>
+                    <div class="nav-menu-right-container">
+                        <ul>
+                            <li class="dropdown small-li">
+                                <div class="language-selector-container">
+                                    <div class="language-selector">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@requestCulture.RequestCulture.UICulture.TwoLetterISOLanguageName.ToUpper() <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+
+                                            @foreach (var culture in cultureItems)
+                                            {
+
+                                                <li><a asp-controller="Common" asp-action="SetCulture" asp-route-culture="@culture.Value">@culture.Text</a></li>
+                                            }
+
+
+                                            @*<li><a href="#">FR</a></li>
+                                                <li><a href="#">IT</a></li>*@
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li class="second-li">
+                                <div id="showMenu">
+                                    <div class="burger-container ">
+                                        <span class="icon-burger"></span>
+                                        <span class="icon-burger"></span>
+                                        <span class="icon-burger"></span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+
+                <div class="body-content">
+
+                    <div class="full-height100 body-container">
+                        @(RenderBody())
+
+                        <div class="clear"></div>
+                        <footer class="footer footer-center-mobile">
+                            <div class="container">
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="footer-text-part-one">
+                                        <h1>@FooterResource.SubscribeToBlogViaEmail</h1>
+                                        <p class="footer-text-email-subscribe">@FooterResource.SubscribeEmailMsg</p>
+                                        <input class="input-footer-emailadress" type="email" name="emailaddress" typeof="text" placeholder="@FooterResource.EnteryourEmail">
+                                        <div class="btn btn-info footer1">@FooterResource.Subscribe</div>
+                                    </div>
+                                </div>
+                                <div class="footer-info-part-two col-sm-12 col-md-4">
+                                    <div class="footer-text-part-two">
+                                        <h2>@FooterResource.WhereToFindUs</h2>
+                                        <div class="contact-us-info footer-part-two-email"><i class="fas fa-envelope"></i>@FooterResource.Email<a href="mailto:info@hydrabiz.com">info@hydrabiz.com</a></div>
+                                        <div class="contact-us-info"><i class="fas fa-globe-americas"></i>@FooterResource.Website<a href="http://www.hydrabiz.com">www.hydrabiz.com</a></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 facebook-page-box" style="padding-left: 0px; padding-right: 0px;">
+                                    <div class="footer-text-part-three">
+                                        <iframe width="340" height="215" name="f11d51779b42784" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" title="fb:page Facebook Social Plugin" src="https://www.facebook.com/v2.3/plugins/page.php?app_id=249643311490&amp;container_width=362&amp;height=432&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2FHydra-Ken-1289264367808355%2F&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=false&amp;width=340" style="border: none; visibility: visible;"></iframe>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div><!-- wrapper -->
+        </div><!-- /container -->
+        <nav class="outer-nav right vertical">
+            <a asp-controller="Home" asp-action="Index" class="icon-home">@NavigationMenuResources.Home</a>
+            <a asp-controller="Home" asp-action="Products"><i class="fas fa-shopping-basket icon-home "></i>@NavigationMenuResources.Products</a>
+            <a asp-controller="Pricing" asp-action="Index"><i class="fas fa-dollar-sign icon-home dollarche"></i>@NavigationMenuResources.Prices</a>
+            <a asp-controller="Home" asp-action="About"><i class="fas fa-users icon-home "></i>@NavigationMenuResources.Aboutus</a>
+            <a asp-controller="Blog" asp-action="Index" class="icon-news">@NavigationMenuResources.Blog</a>
+        </nav>
+    </div><!-- /perspective -->
+
+
+    @RenderSection("Scripts", required: false)
+
+    <!-- Syncfusion Essential JS 2 ScriptManager -->
+    <ejs-scripts></ejs-scripts>
+</body>
+</html>

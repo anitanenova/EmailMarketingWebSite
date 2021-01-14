@@ -1,0 +1,26 @@
+﻿@model BusinessManagement.WebSite.Models.Demo.DemonstrationViewModel
+
+<div>
+    Здравейте това е ВЮ за демонстрации
+</div>
+
+
+<div class="row">
+    
+    @{
+        foreach (var demonstration in Model.Demonstrations)
+        {
+            <div class="col-md-4 demonstration-content">
+                <div class="demonstration">
+                    <div>Име: @demonstration.Name</div>
+                    <div>Калкулация: @demonstration.Calculation</div>
+                    <div>Цена: @demonstration.Price
+                        <span>@demonstration.Currency</span></div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+<script src="~/js/Demo/demonstration.js"></script>

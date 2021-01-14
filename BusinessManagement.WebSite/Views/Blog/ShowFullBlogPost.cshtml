@@ -1,0 +1,209 @@
+﻿@{
+    ViewData["Title"] = "Blog";
+}
+
+@using  BusinessManagement.Services.Enum
+@model BusinessManagement.WebSite.Models.Blog.BlogPostViewModel
+
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="col-md-7">
+
+            <div id="@Model.Post" class="col-md-12">
+
+                @{ var el = Model.Post;}
+
+                @{
+                    if (el.CoverImage != string.Empty)
+                    {
+                        <img class="blog-post-image small-post-el-margin" alt="240_F_134329046_2OSJoExFAJpG6gC3lXTlWOv3EQ4diq7a.jpg"
+                             src="data:image/jpeg;base64,@el.CoverImage" />
+                    }
+                    else
+                    {
+                        <div class="col-md-12 video-hydra small-post-el-margin">
+                            <iframe id="hydra-video-frame" src="@el.VideoUrl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    }
+                }
+
+                <p class="post-date-public">Public: @el.Date.ToShortDateString()</p>
+
+                <h1 class="blog-title">@el.Title</h1>
+
+                <p>@Html.Raw(el.FullText)</p>
+                <div class="clear"></div>
+
+
+                <p class="tags-used-for-post small-post-el-margin">
+                    Tags:@{
+                        int index = 0;
+                        foreach (var tag in el.BlogTags)
+                        {
+                            index++;
+                            if (index == el.BlogTags.Count)
+                            {
+                                <span>@tag.Name</span>
+                            }
+                            else
+                            {
+                                <span>@tag.Name, </span>
+                            }
+                        }
+                    }
+                </p>
+                <div class="clear"></div>
+
+                <div>
+                    @{
+                        var domainName = Model.DomainUrl + "/Blog/ShowFullBlogPost?postId=" + el.Id;
+                    }
+
+
+                    <div class="facebook-btn">
+                        <iframe src="https://www.facebook.com/plugins/share_button.php?href=@(domainName)&layout=button&size=large&mobile_iframe=true&width=73&height=28&appId" width="108" height="28" style="border:none;overflow:hidden;border-radius:0 !important" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
+
+                <div style="width:100%; height:28px; margin-bottom:30px;"></div>
+
+                
+
+                <div class="products-container">
+                    @switch ((int)(StatusEnum)el.Product)
+                    {
+                        case 0:
+                            <div class="post-product-container">
+                                <div class="background-image-post-product">
+                                    <h1 class="blog-text-image post-product-text">Try with us</h1>
+                                    <button class="btn btn-primary">Get Bilder</button>
+                                </div>
+                            </div>
+                            break;
+                        case 1:
+                            <div class="post-product-container">
+                                <div class="background-image-post-product">
+                                    <h1 class="blog-text-image post-product-text">Try with us</h1>
+                                    <button class="btn btn-primary">Get SMS Marketing</button>
+                                </div>
+                            </div>
+
+                            break;
+                        case 2:
+                            <div class="post-product-container">
+                                <div class="background-image-post-product">
+                                    <h1 class="blog-text-image post-product-text">Try with us</h1>
+                                    <button class="btn btn-primary">Get Automation</button>
+                                </div>
+                            </div>
+                            break;
+                        case 3:
+                        <div class="post-product-container">
+                            <div class="background-image-post-product">
+                                <h1 class="blog-text-image post-product-text">Try with us</h1>
+                                <button class="btn btn-primary">Get Mail Marketing</button>
+                            </div>
+                        </div>
+                            break;
+                        case 4:
+
+                            break;
+                    }
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div id="small-posts-container" class="col-md-5">
+
+            @{
+                <h1>@Model.RightSidePostsTitle</h1>
+
+                foreach (var post in Model.RightSidePosts)
+                {
+                    <div id="@post.Id" class="right-container-small-posts col-md-12">
+                        <div class="small-post-video-image col-md-7">
+                            @{
+                                if (post.CoverImage != string.Empty)
+                                {
+                                    <img class="small-posts-images" alt="240_F_134329046_2OSJoExFAJpG6gC3lXTlWOv3EQ4diq7a.jpg"
+                                            src="data:image/jpeg;base64,@post.CoverImage" />
+                                }
+                                else
+                                {
+                                    <div class="video-hydra">
+                                        <iframe id="hydra-video-frame" src="@post.VideoUrl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <div class="small-post-title col-md-5">
+                            <h3>@post.Title</h3>
+                        </div>
+                    </div>                    
+                }
+            }
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+    var menu = new NavMenu(false, $(this));
+    menu.init();
+
+    var filterTopEl = $('#small-posts-container');
+
+    var navMenuHeight = $('.nav-menu').height();
+    var filterTopPosition = filterTopEl.offset().top;
+    var filterLeftPosition = filterTopEl.offset().left;
+    filterTopEl.css("width", filterTopEl.width());
+
+    $(window).on('scroll', function () {
+
+        if ($(this).scrollTop() + navMenuHeight >= filterTopPosition) {
+
+            if (filterTopEl.hasClass("fix-blog-posts-filter-menu")) {
+                return;
+            }
+
+            filterTopEl.addClass("fix-blog-posts-filter-menu");
+            $(".fix-blog-posts-filter-menu").css("left", filterLeftPosition + "px");
+
+        } else {
+
+            if (filterTopEl.hasClass("fix-blog-posts-filter-menu")) {
+                $(".fix-blog-posts-filter-menu").css("left", "");
+                filterTopEl.removeClass("fix-blog-posts-filter-menu");
+            }
+        }
+    });
+
+
+    function myFunction(x) {
+        if (x.matches) { // If media query matches
+            $("#small-posts-container").remove();
+        } else {
+            $("#small-posts-container").show();
+        }
+    }
+
+    var x = window.matchMedia("(max-width: 1000px)")
+    myFunction(x) // Call listener function at run time
+    x.addListener(myFunction) // Attach listener function on state changes
+
+
+</script>

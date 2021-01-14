@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Automation" xml:space="preserve">
+    <value>Automation</value>
+  </data>
+  <data name="Bilder" xml:space="preserve">
+    <value>Bilder</value>
+  </data>
+  <data name="CovPicReq" xml:space="preserve">
+    <value>Filed "Cover Pic" is required!</value>
+  </data>
+  <data name="CovVidReq" xml:space="preserve">
+    <value>Field "Cover Video" is requiered!</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="MailM" xml:space="preserve">
+    <value>Mail Marketing</value>
+  </data>
+  <data name="NoProduct" xml:space="preserve">
+    <value>No product</value>
+  </data>
+  <data name="OtherPosts" xml:space="preserve">
+    <value>Other posts</value>
+  </data>
+  <data name="SimilarPosts" xml:space="preserve">
+    <value>Similar posts</value>
+  </data>
+  <data name="SMSM" xml:space="preserve">
+    <value>SMS Marketing</value>
+  </data>
+  <data name="Visible" xml:space="preserve">
+    <value>Visible</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddTag" xml:space="preserve">
+    <value>Adding a new tag</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CovPic" xml:space="preserve">
+    <value>Cover Picture</value>
+  </data>
+  <data name="CovVidLink" xml:space="preserve">
+    <value>Cover Video Youtube link</value>
+  </data>
+  <data name="Deac" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+  <data name="DeactPost" xml:space="preserve">
+    <value>Deactivating a post</value>
+  </data>
+  <data name="DeactPostQuestion" xml:space="preserve">
+    <value>Would you like to deactivate a post</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>Drafts</value>
+  </data>
+  <data name="EditPost" xml:space="preserve">
+    <value>Edit a post</value>
+  </data>
+  <data name="ErrOcc" xml:space="preserve">
+    <value>An error has occurred. Please try again.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error:</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Select a file</value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>Allowed file types: .jpg, .bmp, .png, .jpeg</value>
+  </data>
+  <data name="FullTxt" xml:space="preserve">
+    <value>Full text:</value>
+  </data>
+  <data name="FullTxtReq" xml:space="preserve">
+    <value>Field "Full text" is required</value>
+  </data>
+  <data name="Headline" xml:space="preserve">
+    <value>Headline:</value>
+  </data>
+  <data name="HeadlineReq" xml:space="preserve">
+    <value>Feild "Headline" is required</value>
+  </data>
+  <data name="MorInfoMorSuccess" xml:space="preserve">
+    <value>More information, more success</value>
+  </data>
+  <data name="NewPost" xml:space="preserve">
+    <value>Create a new post</value>
+  </data>
+  <data name="NoResults" xml:space="preserve">
+    <value>No results!</value>
+  </data>
+  <data name="NotSelect" xml:space="preserve">
+    <value>Not selected...</value>
+  </data>
+  <data name="PicTypeSel" xml:space="preserve">
+    <value>Please choose a picture from the allowed file types</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>Product:</value>
+  </data>
+  <data name="ProductReq" xml:space="preserve">
+    <value>Field "Product" is required</value>
+  </data>
+  <data name="PubDate" xml:space="preserve">
+    <value>Publication date:</value>
+  </data>
+  <data name="PubDateReq" xml:space="preserve">
+    <value>Field "Publication date" is required</value>
+  </data>
+  <data name="RemovePic" xml:space="preserve">
+    <value>Remove the selected picture</value>
+  </data>
+  <data name="SearchTxt" xml:space="preserve">
+    <value>Search text</value>
+  </data>
+  <data name="ShortTxt" xml:space="preserve">
+    <value>Short text:</value>
+  </data>
+  <data name="ShortTxtReq" xml:space="preserve">
+    <value>Field "Short text" is required</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="StatusReq" xml:space="preserve">
+    <value>Field "Status" is required</value>
+  </data>
+  <data name="TagName" xml:space="preserve">
+    <value>Tag name:</value>
+  </data>
+  <data name="TagReq" xml:space="preserve">
+    <value>Field "Tag" is required</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="TagSearch" xml:space="preserve">
+    <value>Tag search</value>
+  </data>
+  <data name="TagSelectReq" xml:space="preserve">
+    <value>At least 1 tag should be selected</value>
+  </data>
+  <data name="TxtListPost" xml:space="preserve">
+    <value>This text appears in the list with all posts</value>
+  </data>
+  <data name="TxtPostOpen" xml:space="preserve">
+    <value>This text appears when a post is opened</value>
+  </data>
+  <data name="VisibleInTime" xml:space="preserve">
+    <value>Visible in time</value>
+  </data>
+  <data name="VisibleNow" xml:space="preserve">
+    <value>Visible now</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Duplicate" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+</root>

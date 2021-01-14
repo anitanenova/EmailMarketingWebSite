@@ -1,0 +1,54 @@
+﻿@using BusinessManagement.Resources.LanguageResources
+@using BusinessManagement.WebSite.Models.Home
+
+
+@{
+    ViewData["Title"] = "About Us";
+}
+
+<div class="backgroung-assemble-success">
+    <img src="~/images/Home/assemble-success.png" />
+</div>
+<div class="bg-about-us">
+    <div class="table-containerf">
+        <div class="table-cellf">
+            <div class="container">
+                <div class="part-one-left-container col-md-4 ">
+                    <p class="about-us-title">@NavigationMenuResources.Aboutus</p>
+                    <p class="about-us-text">@NavigationMenuResources.AboutUsTxt</p>
+                </div>
+                <div id="hydra-video-modal-container"></div>
+                <div class="part-two-center-container col-md-4">
+                    <p class="about-us-title text-center">@NavigationMenuResources.OurHistory</p>
+                    <div id="hydra-image" class="mouse-pointer">
+                        <img class="center-image small-mobile-center-image" src="~/images/Home/hydra.png" />
+                    </div>
+                </div>
+                <div class="part-three-right-container col-md-4 ">
+
+                    <p class="about-us-title">@NavigationMenuResources.Aboutus</p>
+                    <p class="about-us-text">@NavigationMenuResources.AboutUsTxt</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    var model = new SubscribeViewModel
+    {
+        SubTitle = @NavigationMenuResources.SubscribeNewsletter,
+        Title = @NavigationMenuResources.MoreInformation
+    };
+
+    await Html.RenderPartialAsync("_Subscribe", model);
+}
+
+<script>
+    var menu = new NavMenu(false, $(this));
+    menu.init();
+
+    $('#hydra-image').on('click', function () {
+        ShowVideoHydra("hydra-video-modal-container");
+    });
+</script>

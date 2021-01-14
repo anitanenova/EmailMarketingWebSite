@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessManagement.WebSite", "BusinessManagement.WebSite\BusinessManagement.WebSite.csproj", "{93848965-F438-47A3-AD4B-8DDDF1DDE85A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessManagement.Services", "BusinessManagement.Services\BusinessManagement.Services.csproj", "{05213B1E-3A73-4D5D-89EA-AB4699E759AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessManagement.Resources", "BusinessManagement.Resources\BusinessManagement.Resources.csproj", "{1149B082-E452-4A84-80FE-2CE8550D45DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93848965-F438-47A3-AD4B-8DDDF1DDE85A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93848965-F438-47A3-AD4B-8DDDF1DDE85A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93848965-F438-47A3-AD4B-8DDDF1DDE85A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93848965-F438-47A3-AD4B-8DDDF1DDE85A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05213B1E-3A73-4D5D-89EA-AB4699E759AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05213B1E-3A73-4D5D-89EA-AB4699E759AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05213B1E-3A73-4D5D-89EA-AB4699E759AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05213B1E-3A73-4D5D-89EA-AB4699E759AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1149B082-E452-4A84-80FE-2CE8550D45DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1149B082-E452-4A84-80FE-2CE8550D45DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1149B082-E452-4A84-80FE-2CE8550D45DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1149B082-E452-4A84-80FE-2CE8550D45DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77343BE9-5927-4C96-92A6-B84EDD9C2B68}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://hydrabizz.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BusinessManagement.WebSite\\BusinessManagement.WebSite.csproj
+		SccProjectName1 = BusinessManagement.WebSite
+		SccLocalPath1 = BusinessManagement.WebSite
+		SccProjectUniqueName2 = BusinessManagement.Services\\BusinessManagement.Services.csproj
+		SccProjectName2 = BusinessManagement.Services
+		SccLocalPath2 = BusinessManagement.Services
+		SccProjectUniqueName3 = BusinessManagement.Resources\\BusinessManagement.Resources.csproj
+		SccProjectName3 = BusinessManagement.Resources
+		SccLocalPath3 = BusinessManagement.Resources
+	EndGlobalSection
+EndGlobal

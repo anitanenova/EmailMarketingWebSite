@@ -1,0 +1,96 @@
+﻿@using BusinessManagement.Resources.LanguageResources
+@using  BusinessManagement.Services.Enum
+@using BusinessManagement.Services.Model.DTO
+@model BusinessManagement.WebSite.Models.Blog.PlogPostsViewModel
+
+@{
+    foreach (var post in Model.Posts)
+    {
+        <li>
+            <div class="col-md-12 left-container-blog" id="blog-container-@post.Id">
+
+                <div>
+                    <p id="status-@post.Id" class="status-of-post">
+                        @{
+                            var postStatus = (StatusEnum)post.Status;
+                            var type = postStatus.GetType();
+                            var member = type.GetMember(postStatus.ToString());
+                            System.ComponentModel.DataAnnotations.DisplayAttribute displayName = (System.ComponentModel.DataAnnotations.DisplayAttribute)member[0].GetCustomAttributes(typeof(System.ComponentModel.DataAnnotations.DisplayAttribute), false).FirstOrDefault();
+
+                        }
+                        @displayName.Name
+
+                    </p>
+
+                    <a asp-controller="Blog" asp-action="BlogPostEdit" asp-route-postId="@post.Id">
+
+                        <i id="blog-icons-pen-@post.Id" class="fas fa-pen blog-icons-pen pull-right"></i>
+                    </a>
+
+
+                    @{ if (post.Status != (int)StatusEnum.inactive)
+                        {
+                            <i id="blog-icons-ban-@post.Id" class="fas fa-ban blog-icons-ban pull-right" onclick="desactivePostModal('@post.Id')"></i>
+                        }
+                    }
+
+                    <div class="col-md-12">
+                        <h3 class="date-tags-blog"><span>@post.Date.ToShortDateString()</span></h3>
+                    </div>
+
+                    @{
+                        if (post.CoverImage != string.Empty)
+                        {
+                            <img class="blog-post-image" alt="240_F_134329046_2OSJoExFAJpG6gC3lXTlWOv3EQ4diq7a.jpg"
+                                 src="data:image/jpeg;base64,@post.CoverImage" />
+                        }
+                        else
+                        {
+                            <div class="col-md-12 video-hydra">
+                                <iframe id="hydra-video-frame" src="@post.VideoUrl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <h1 class="blog-title">@post.Title</h1>
+
+                <p class="blog-text">@Html.Raw(post.ShortText)</p>
+
+
+                <div class="col-12 blog-post-btn-container">
+                    <a asp-controller="Blog" asp-action="ShowFullBlogPost" asp-route-postId="@post.Id">
+                        <div class="btn btn-info btn-primary-lear-more">@BlogResource.LearnMore</div>
+                    </a>
+                    @*<div class="fb-share-button" data-href="https://www.facebook.com/Hydra-Ken-1289264367808355/" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FHydra-Ken-1289264367808355%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=large&mobile_iframe=true&width=73&height=28&appId" width="73" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe></a></div>*@
+                    @*<button class="btn btn-tweet">tweet</button>*@
+                    @{
+                        var domainName = Model.DomainUrl + "/Blog/ShowFullBlogPost?postId=" + post.Id;
+                    }
+
+                    <div class="facebook-btn">
+                        <iframe src="https://www.facebook.com/plugins/share_button.php?href=@(domainName)&layout=button&size=large&mobile_iframe=true&width=73&height=28&appId" width="108" height="29" style="border:none;overflow:hidden;" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
+            </div>
+            <script>
+                    if (!window.matchMedia('(max-width: 1000px)').matches) {
+                        $("#blog-container-@post.Id").on('mouseover', function () {
+                            $("#blog-icons-pen-@post.Id, #blog-icons-ban-@post.Id").show();
+                        });
+                        $("#blog-container-@post.Id").on('mouseout', function () {
+                            $("#blog-icons-pen-@post.Id, #blog-icons-ban-@post.Id").hide();
+                        });
+                    }
+
+
+
+            </script>
+
+
+
+        </li>
+
+    }
+
+}

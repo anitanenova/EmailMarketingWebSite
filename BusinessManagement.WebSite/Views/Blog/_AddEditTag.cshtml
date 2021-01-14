@@ -1,0 +1,74 @@
+﻿@using BusinessManagement.Resources.LanguageResources
+@model BusinessManagement.WebSite.Models.Blog.AddEditNewTagViewModel
+<!-- Modal -->
+<div id="add-new-tag-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@BlogResource.AddTag</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Blog" asp-action="AddEditNewTag" data-ajax-begin="onAddEditTagBegin" data-ajax-success="onAddEditTagAdded" data-ajax-failure="onAddEditTagFailure" data-ajax="true" data-ajax-method="POST">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label asp-for="Name"></label>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" asp-for="Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@BlogResource.Close</button>
+                        <input id="addTagBtnSubmit" class="btn btn-primary" type="submit" value="@BlogResource.Add" />
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function onAddEditTagBegin() {
+        window.showLoading();
+    }
+
+    function onAddEditTagAdded(args) {
+        window.hideLoading();
+        debugger;
+        $("#add-new-tag-modal").modal('hide');
+        if (args.isFailed) {
+            alert("@BlogResource.Error " + args.massage);
+        } else {
+            alert(args.massage);
+        }
+
+
+        window.reloadData({
+            searchInput: $("#search-tag"),
+            dataCon: $("#search-tag-ul"),
+            url: "/Blog/Tags",
+            take: Number.MAX_SAFE_INTEGER,
+            dataLoaded: onTagLoaded
+        });
+
+
+    }
+
+
+    function onAddEditTagFailure(args) {
+        window.hideLoading();
+        $("#add-new-tag-modal").modal('hide');
+        alert("@BlogResource.ErrOcc");
+    }
+
+
+</script>

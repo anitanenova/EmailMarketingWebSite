@@ -1,0 +1,13 @@
+﻿@using BusinessManagement.Resources.LanguageResources
+@model BusinessManagement.WebSite.Models.Home.SubscribeViewModel
+
+<div class="part-four-bg-image">
+    <div class="container-subscribe-text">
+        <div class="subscribe-text1">@Model.Title</div>
+        <div class="subscribe-text2">@Model.SubTitle</div>
+    </div>
+    <div class="subscribe-elements-container ">
+        <input class="input-subscribe" type="text" placeholder="@FooterResource.EnteryourEmail" />
+        <div class="btn btn-info subscribe-btn">@FooterResource.Subscribe</div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Products";
+}
+
+
+<div class="product-image">
+    <img src="~/images/Home/success-image.png" />
+</div>
+
+<div class="container">
+    <div class="left-container col-md-4">
+        <h1 class="title-products1">Mail Marketing</h1>
+        <p class="text-products1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.</p>
+        <div class="btn btn-info join now1-btn">join now</div>
+        <h1 class="title-products2">Mail Marketing</h1>
+        <p class="text-products2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.</p>
+        <div class="btn btn-info join now2-btn">join now</div>
+    </div>
+
+    <div id="hydra-video-modal-container"></div>
+
+    <div class="center-container col-md-4">
+        <img id="hydra-image" class="mouse-pointer" src="~/images/Home/hydra.png" />
+        <h1 class="title-products-image">Mail Marketing</h1>
+        <p class="text-products-image">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.</p>
+        <div class="btn btn-info join now-image-btn">join now</div>
+    </div>
+
+    <div class="right-container col-md-4">
+        <h1 class="title-products-right1">Mail Marketing</h1>
+        <p class="text-products-right1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.</p>
+        <div class="btn btn-info join now-right1-btn">join now</div>
+        <h1 class="title-products-right2">Mail Marketing</h1>
+        <p class="text-products-right2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.</p>
+        <div class="btn btn-info join now-right2-btn">join now</div>
+    </div>
+</div>
+
+<div class="product-image2 full-screen-div">
+</div>
+
+
+
+
+<script>
+    var menu = new NavMenu(false, $(this));
+    menu.init();
+    $('#hydra-image').on('click', function () {
+        ShowVideoHydra("hydra-video-modal-container");
+    });
+</script>

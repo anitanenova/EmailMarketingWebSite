@@ -1,0 +1,318 @@
+﻿@{
+    ViewData["Title"] = "Blog";
+}
+
+@using BusinessManagement.Resources.LanguageResources
+@using  BusinessManagement.Services.Enum
+@model BusinessManagement.WebSite.Models.Blog.BlogViewModel
+
+<div class="container-blog-image">
+
+    <div class="blog-first-image post-image-first">
+        <h1 class="blog-text-image">@BlogResource.MorInfoMorSuccess</h1>
+    </div>
+
+</div>
+
+<div class="container container-blog">
+
+    <div id="blog-posts-container" class="col-md-8">
+        <ul id="posts-ul">
+            @{
+                var blogPostsVewModel = new BusinessManagement.WebSite.Models.Blog.PlogPostsViewModel
+                {
+                    DomainUrl = Model.DomainUrl,
+                    Posts = Model.Posts
+
+                };
+
+                await Html.RenderPartialAsync("_Posts", blogPostsVewModel);
+            }
+        </ul>
+
+
+    </div>
+
+    <div id="desactive-post-modal-container"></div>
+
+    <div class="posts-filter-right-menu">
+        <div class="col-md-4 blog-posts-filter div-right blog-posts-filter-center-menu">
+            <div class="input-group filter-fierst-part-centering center-filter">
+                <span class="input-group-btn">
+                    <a asp-controller="Blog" asp-action="BlogPostAdd" class="btn btn-primary">+</a>
+                </span>
+                <input id="posts" class="blog-posts-search add-new-post-btn" type="text" placeholder="@BlogResource.SearchTxt">
+                <input type="hidden" id="filter-date-visibility" value="@((int)Model.DateVisibility)" />
+                <input type="hidden" id="filter-status" value="@Model.Status" />
+                <input type="hidden" id="filter-tags-ids" />
+            </div>
+            <div class="col-md-12">
+                <div class="btns-container-active">
+                    <div id="btn-visible-now" data-status="@((int)StatusEnum.visible)" data-visibility="@((int)BlogPostDateVisibilityEnum.visibleToToday)" class="btn btn-primary blog-post-filter visibility-selected">@BlogResource.VisibleNow</div>
+                    <div id="btn-visible-after-time" data-status="@((int)StatusEnum.visible)" data-visibility="@((int)BlogPostDateVisibilityEnum.visibleAfterToday)" class="btn btn-primary blog-post-filter">@BlogResource.VisibleInTime</div>
+                    <div id="btn-drafts" data-status="@((int)StatusEnum.draft)" data-visibility="@((int)BlogPostDateVisibilityEnum.all)" class="btn btn-primary blog-post-filter">@BlogResource.Drafts</div>
+                    <div id="btn-no-active" data-status="@((int)StatusEnum.inactive)" data-visibility="@((int)BlogPostDateVisibilityEnum.all)" class="btn btn-primary blog-post-filter">@BlogResource.Inactive</div>
+                    <div id="btn-all" data-status="null" data-visibility="@((int)BlogPostDateVisibilityEnum.all)" class="btn btn-primary blog-post-filter">@BlogResource.All</div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h3 class="titl-tags-blog"><span>@BlogResource.Tags</span></h3>
+            </div>
+            <div class="col-md-12">
+                <div class="tags-btns-container">
+
+                    @{
+
+                        foreach (var tag in Model.BlogPostTags)
+                        {
+                            <div data-id="@tag.Id" class="btn btn-info tag">@tag.Name</div>
+
+                        }
+
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script>
+
+    var take = parseInt('@Model.Take');
+    var visibleStatus = parseInt('@((int)StatusEnum.visible)');
+    var draftStatus = parseInt('@((int)StatusEnum.draft)');
+    var inactiveStatus = parseInt('@((int)StatusEnum.inactive)');
+    var visibleForFullPeriod = parseInt('@((int)BlogPostDateVisibilityEnum.all)');
+    var visibleAfterToday = parseInt('@((int)BlogPostDateVisibilityEnum.visibleAfterToday)');
+    var visibleToToday = parseInt('@((int)BlogPostDateVisibilityEnum.visibleToToday)');
+
+    var menu = new NavMenu(false, $(this));
+    menu.init();
+
+    var filterTopEl = $('.blog-posts-filter');
+
+    var navMenuHeight = $('.nav-menu').height();
+    var filterTopPosition = filterTopEl.offset().top;
+    var filterLeftPosition = filterTopEl.offset().left;
+    filterTopEl.css("width", filterTopEl.width());
+
+
+    function desactivePostModal(id) {
+
+        window.showLoading();
+
+        $.get("/blog/DesactivePost?postId=" + id, function (data) {
+            $("#desactive-post-modal-container").html(data);
+            var modalDesactivePost = $("#desactive-post-modal");
+            modalDesactivePost.modal('show');
+            window.hideLoading();
+        });
+    }
+
+    function MenuRight() {
+
+        if ($(window).width() < 1000) {
+            $(".posts-filter-right-menu").prependTo(".container-blog");
+            $(".blog-posts-filter-center-menu").removeClass(".blog-posts-filter");
+            $(".blog-posts-filter-center-menu").removeClass(".div-right");
+            $(".blog-posts-filter").removeClass('fix-blog-posts-filter-menu');
+            $(".blog-posts-search").removeClass('add-new-post-btn');
+            $(".input-group").addClass('filter-fierst-part-centering-center-menu');
+            $(".btns-container-active").addClass('center-filter-btns');
+        } else {
+            if ($(this).scrollTop() + navMenuHeight >= filterTopPosition) {
+
+                if (filterTopEl.hasClass("fix-blog-posts-filter-menu")) {
+                    return;
+                }
+
+                filterTopEl.addClass("fix-blog-posts-filter-menu");
+                $(".fix-blog-posts-filter-menu").css("left", filterLeftPosition + "px");
+
+            } else {
+
+                if (filterTopEl.hasClass("fix-blog-posts-filter-menu")) {
+                    $(".fix-blog-posts-filter-menu").css("left", "");
+                    filterTopEl.removeClass("fix-blog-posts-filter-menu");
+                }
+            }
+
+        }
+
+
+    };
+
+
+    $(document).ready(function () {
+        MenuRight();
+    });
+
+    $(window).on('scroll', function () {
+        MenuRight();
+    });
+
+    $(window).resize(function () {
+        MenuRight();
+    });
+
+
+
+
+
+    var customParams = [];
+    customParams.push(new window.CustomParameters("status", "#filter-status"));
+    customParams.push(new window.CustomParameters("dateVisibility", "#filter-date-visibility"));
+    customParams.push(new window.CustomParameters("tagsIdsStr", "#filter-tags-ids"));
+
+    ////////////////////SEARCH for right menu
+
+    var obj = {
+        searchEl: $("#posts"),
+        ulEl: $("#posts-ul"),
+        actionUrl: "/Blog/Posts",
+        take: take,
+        noDataNsg: "@BlogResource.NoResults",
+        customParameters: customParams
+    };
+
+    window.setSearch(obj);
+
+
+    /////////////////InfiniteScroll
+
+    window.setInfinityScroll({
+        take: take,
+        url: "/Blog/Posts",
+        scrolledEl: window,
+        searchInput: "#posts",
+        ulElSelector: "#posts-ul",
+        isWindowScroll: true,
+        customParameters: customParams
+
+    });
+
+    ////////////////////Btn posts Visibility
+
+    $('.btns-container-active > div').on('click', function () {
+        $('.btns-container-active > div').removeClass('visibility-selected');
+        $(this).addClass('visibility-selected');
+    });
+
+
+    //////////////////////// Choise by Visibility and Tags
+
+    function getTagsIdsFromFilter() {
+        var tagsIds = [];
+
+        var allTags = $(".tag-selected");
+
+        for (var i = 0; i < allTags.length; i++) {
+            tagsIds.push($(allTags[i]).attr("data-id"));
+        }
+
+        var tagsIdsStr = null;
+
+        if (tagsIds.length != 0) {
+            tagsIdsStr = JSON.stringify(tagsIds);
+        }
+        return tagsIdsStr;
+    }
+
+    function updateFilterFields(status, isdateVisibility, tagsIds) {
+        $("#filter-date-visibility").val(isdateVisibility);
+        $("#filter-status").val(status);
+        $("#filter-tags-ids").val(tagsIds);
+    }
+    function getStatus() {
+        return $('#filter-status').val();
+    }
+    function getIsdateVisibility() {
+        return $("#filter-date-visibility").val();
+    }
+
+    function startFilter() {
+        ulEl.attr('data-filtring', 1);
+        ulEl.attr('data-all', 0);
+    }
+
+    $('.blog-post-filter').on('click', function () {
+        var btn = $(this);
+
+        showLoading();
+
+        var ulEl = $("#posts-ul");
+        ulEl.attr('data-filtring', 1);
+        ulEl.attr('data-all', 0);
+        var url = '/Blog/Posts';
+        var searchString = $("#posts").val();
+
+        var status = parseInt(btn.attr('data-status'));
+        var dateVisibility = parseInt(btn.attr('data-visibility'));
+        var allTags = getTagsIdsFromFilter();
+
+        $.get(url, { skip: 0, take: take, dateVisibility: dateVisibility, status: status, tagsIdsStr: allTags, searchString: searchString }, function (data) {
+
+            ulEl.attr('data-filtring', 0);
+
+            updateFilterFields(status, dateVisibility, allTags);
+            if (data.trim() != "") {
+                ulEl.html(data);
+
+            } else {
+                ulEl.html('<li> @BlogResource.NoResults </li>');
+
+            }
+            hideLoading();
+        });
+    });
+
+    $('.tag').on('click', function () {
+
+        showLoading();
+
+        if ($(this).hasClass('tag-selected')) {
+            $(this).removeClass('tag-selected');
+        }
+        else {
+            $(this).addClass('tag-selected');
+        }
+
+        var ulEl = $("#posts-ul");
+        ulEl.attr('data-filtring', 1);
+        ulEl.attr('data-all', 0);
+        var searchString = $("#posts").val();
+        var url = '/Blog/Posts';
+
+        var tagsFromFilter = getTagsIdsFromFilter();
+        var status = getStatus();
+        var isdateVisibility = getIsdateVisibility();
+
+
+        $.get(url, { skip: 0, take: take, dateVisibility: isdateVisibility, status: status, tagsIdsStr: tagsFromFilter, searchString: searchString }, function (data) {
+
+            ulEl.attr('data-filtring', 0);
+
+            updateFilterFields(status, isdateVisibility, tagsFromFilter);
+
+            if (data.trim() != "") {
+                ulEl.html(data);
+
+            } else {
+                ulEl.html('<li> @BlogResource.NoResults </li>');
+
+            }
+            hideLoading();
+        });
+
+    });
+
+
+
+</script>

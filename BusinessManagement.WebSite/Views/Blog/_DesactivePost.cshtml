@@ -1,0 +1,61 @@
+﻿@using BusinessManagement.Resources.LanguageResources
+@model BusinessManagement.Services.Model.DTO.BlogPostDto
+<!-- Modal -->
+<div id="desactive-post-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@BlogResource.DeactPost</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Blog" asp-action="PostDesactiveConfirm" method="post" data-ajax-begin="onDesactivePostBegin" data-ajax-success="onDesactivePostConfirm" data-ajax-failure="onDesactivePostFailure" data-ajax="true" data-ajax-method="POST">
+                    <div class="form-group">
+                        <div>
+                            <p class="modal-text-desactive-post">@BlogResource.DeactPostQuestion "@Model.Title"</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@BlogResource.Close</button>
+                        <input class="btn btn-primary" type="submit" value="@BlogResource.Deac" />
+                    </div>
+                    <input type="hidden" asp-for="Id" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function onDesactivePostBegin() {
+        window.showLoading();
+    }
+
+    function onDesactivePostConfirm(args) {
+        debugger;
+        window.hideLoading();
+
+        $("#desactive-post-modal").modal('hide');
+        if (args.isFailed) {
+            alert("@BlogResource.Error " + args.massage);
+        } else {
+            $("#status-" + args.postId).html(args.status);
+        }
+
+        $("#desactive-post-modal").modal('hide');
+        $("#blog-icons-ban-" + args.postId).remove();
+
+
+    }
+
+
+    function onDesactivePostFailure(args) {
+        window.hideLoading();
+        $("#desactive-post-modal").modal('hide');
+        alert("@BlogResource.ErrOcc");
+    }
+
+
+</script>
