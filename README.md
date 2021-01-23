@@ -1,4 +1,4 @@
-# EmailMarketingWebSite
+# EmailMarketingWebsite
 
 This is my first project on c#.
 
